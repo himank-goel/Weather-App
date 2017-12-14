@@ -31,3 +31,40 @@ html, body {
     margin: 10px;
     margin-left: 5px;
 }
+
+.weather {
+    display: inline-block;
+    width : 220px;
+    height: 220px;
+    margin: 10px;
+    text-align: left;
+    position: relative;
+}
+
+.weather-img {
+    margin-left: 25%;
+    width: 50%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.weather-text-bottom {
+    background-color: black;
+    color: white;
+    opacity: 0.75;
+    width: 214px;
+    margin-left: 3px;
+    text-align: center;
+    position: absolute; 
+    bottom: 0;
+    padding: 10px;
+}
+
+.weather-text {
+    background-color: black;
+    color: white;
+    opacity: 0.75;
+    width: 214px;
+    margin-left: 3px;
+    text-align: center;  
+}

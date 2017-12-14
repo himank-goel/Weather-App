@@ -108,7 +108,7 @@ class Weather extends Component {
     render() {
         const { json } = this.props;
         const editedArray = this.getFiveDayArray(json.list);
-        console.log(editedArray);
+        //console.log(editedArray);
         //console.log(json);
         return(
             <div>
@@ -143,8 +143,9 @@ class Weather extends Component {
                                 alt = "Img"
                             />
                             <p className = "weather-text-bottom">
-                                {currentDay.weatherEntry.main.temp_min}<br></br>
-                                {currentDay.weatherEntry.main.temp_max}
+                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_min)-273.15)*1.8)+32)+'e2')+'e-2') }
+                                <br></br>
+                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_max)-273.15)*1.8)+32)+'e2')+'e-2') }
                             </p>
                         </div>
                     )

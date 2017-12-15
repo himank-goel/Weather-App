@@ -10,6 +10,7 @@ class App extends Component {
             query: '',
             json: null
         }
+        this.showPosition = this.showPosition.bind(this);
     }
 
     search() {
@@ -27,6 +28,27 @@ class App extends Component {
         });
         //console.log(this.state);
     }
+
+    searchUsingLocation() {
+        navigator.geolocation.getCurrentPosition(this.showPosition);   
+    }
+
+    showPosition(position) {
+        //console.log("hello");
+        var latitude = "lat=" + position.coords.latitude + "&lon=";
+        var longitude = position.coords.longitude ;
+        const BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?" + latitude + longitude ;
+        const FETCH_URL = BASE_URL + "&mode=json&APPID=6c9cca3b9c5136848c745e322db2fcca"; 
+        console.log(FETCH_URL);
+        fetch(FETCH_URL, {
+            method: 'GET'
+        })   
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+            this.setState({json})
+        });
+    }               
 
     render() {
         return (
@@ -56,7 +78,10 @@ class App extends Component {
                             </InputGroup.Addon>
                         </InputGroup>
                         <div>
-                            <Button className = "Current-location-btn btn-primary"> 
+                            <Button 
+                                className = "Current-location-btn btn-primary"
+                                onClick = {() => this.searchUsingLocation()}    
+                            > 
                                 Get weather at your current location
                             </Button>
                         </div>

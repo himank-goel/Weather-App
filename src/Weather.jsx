@@ -123,18 +123,10 @@ class Weather extends Component {
                             className = "weather"
                         >
                             {
-                                (k === 0) ?  <p className = "weather-text"> Today </p> : <p></p>
-                            }
-                            {
-                                (k === 1) ?  <p className = "weather-text"> Tomorrow </p> : <p></p>
-                            }
-                            {    
-                                (k === 2) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> : <p></p> 
-                            }
-                            {    
-                                (k === 3) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> : <p></p>     
-                            }
-                            {    
+                                (k === 0) ?  <p className = "weather-text"> Today </p> :                               
+                                (k === 1) ?  <p className = "weather-text"> Tomorrow </p> :
+                                (k === 2) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> :                             
+                                (k === 3) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> : 
                                 (k === 4) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> : <p></p>
                             }
                             <img    
@@ -143,9 +135,9 @@ class Weather extends Component {
                                 alt = "Img"
                             />
                             <p className = "weather-text-bottom">
-                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_min)-273.15)*1.8)+32)+'e2')+'e-2') }
+                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_min)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
                                 <br></br>
-                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_max)-273.15)*1.8)+32)+'e2')+'e-2') }
+                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_max)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
                             </p>
                         </div>
                     )

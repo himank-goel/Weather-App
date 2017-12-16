@@ -2,6 +2,51 @@ import React, { Component } from 'react';
 import './app.css';
 
 class Weather extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            array: [],
+            editedArray: [],
+            0: false,
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+        }
+    }
+
+    componentDidMount() {
+        const { json } = this.props;
+        const editedArray = this.getFiveDayArray(json.list);
+        if(this.state.array.length === 0){
+                this.setState({
+                    array: json.list,
+                    editedArray
+            })
+        }
+    }
+
+    threeHourDisplay(k) {
+       // console.log(this.state[k]);
+        if(this.state[k] === false) {
+            this.setState({
+                0: false,
+                1: false,
+                2: false,
+                3: false,
+                4: false,
+            });
+            this.setState({
+                [k]: true 
+            });
+        }
+        else {
+            this.setState({
+                [k]: false
+            })
+        }
+       // console.log(this.state);
+    }
     
     getFiveDayArray(list = []) {
         const editedArray = [];
@@ -121,6 +166,7 @@ class Weather extends Component {
                         <div 
                             key = {k} 
                             className = "weather"
+                            onClick = { () => this.threeHourDisplay(k)}
                         >
                             {
                                 (k === 0) ?  <p className = "weather-text"> Today </p> :                               
@@ -135,10 +181,11 @@ class Weather extends Component {
                                 alt = "Img"
                             />
                             <p className = "weather-text-bottom">
-                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_min)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
+                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_min, 10)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
                                 <br></br>
-                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_max)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
+                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_max, 10)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
                             </p>
+
                         </div>
                     )
                 })}

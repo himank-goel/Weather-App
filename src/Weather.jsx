@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './app.css';
+import { Glyphicon } from 'react-bootstrap'; 
+import ThreeHour from './ThreeHour';
 
 class Weather extends Component {
     constructor(props) {
@@ -168,7 +169,7 @@ class Weather extends Component {
                             className = "weather w3-card-4"
                             onClick = { () => this.threeHourDisplay(k)}
                         >
-                            <header class="w3-container w3-blue">
+                            <header className="w3-container w3-blue heading">
                                 {
                                     (k === 0) ?  <p className = "weather-text"> Today </p> :                               
                                     (k === 1) ?  <p className = "weather-text"> Tomorrow </p> :
@@ -179,23 +180,27 @@ class Weather extends Component {
                             </header>
                             <img    
                                 src = {weatherImg}
-                                class="w3-container"    
+                                className="w3-container"    
                                 // className = "weather-img"
                                 alt = "Img"
                             />
-                            <footer class="w3-container w3-blue">
-                                <p  /*className = "weather-text-bottom"*/>
+                            <footer className="w3-container">
+                                <div  /*className = "weather-text-bottom"*/>
                                     { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_min, 10)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
                                     <br></br>
                                     { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_max, 10)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
                                     {   
                                     this.state[k] === true                
                                     ? <div> 
-                                        Hello
+                                        <ThreeHour
+                                            info = { this.state }
+                                        />
                                     </div>
-                                    : <div></div>
+                                    : <div>
+                                        <Glyphicon glyph = "chevron-down" />
+                                    </div>
                                 }
-                                </p>
+                                </div>
                             </footer>
                         </div>
                     )

@@ -60,6 +60,10 @@ html, body {
     padding: 10px;
 }
 
+.heading {
+    padding: 0px;
+}
+
 .weather-text {
     /* background-color: black; */
     color: white;
@@ -67,4 +71,8 @@ html, body {
     width: 220px;
     /* margin-left: 3px;  */
     text-align: center;  
+}
+
+.hourly-forecast {
+    font-size: 15px;
 }

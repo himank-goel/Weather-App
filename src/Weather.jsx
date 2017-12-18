@@ -181,7 +181,7 @@ class Weather extends Component {
                             <img    
                                 src = {weatherImg}
                                 className="w3-container"    
-                                // className = "weather-img"
+                                className = "weather-img"
                                 alt = "Img"
                             />
                             <footer className="w3-container">

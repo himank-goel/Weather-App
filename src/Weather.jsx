@@ -165,27 +165,38 @@ class Weather extends Component {
                     return (
                         <div 
                             key = {k} 
-                            className = "weather"
+                            className = "weather w3-card-4"
                             onClick = { () => this.threeHourDisplay(k)}
                         >
-                            {
-                                (k === 0) ?  <p className = "weather-text"> Today </p> :                               
-                                (k === 1) ?  <p className = "weather-text"> Tomorrow </p> :
-                                (k === 2) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> :                             
-                                (k === 3) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> : 
-                                (k === 4) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> : <p></p>
-                            }
+                            <header class="w3-container w3-blue">
+                                {
+                                    (k === 0) ?  <p className = "weather-text"> Today </p> :                               
+                                    (k === 1) ?  <p className = "weather-text"> Tomorrow </p> :
+                                    (k === 2) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> :                             
+                                    (k === 3) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> : 
+                                    (k === 4) ?  <p className = "weather-text"> {currentDay.weatherEntry.dt_txt.split(" ")[0]} </p> : <p></p>
+                                }
+                            </header>
                             <img    
                                 src = {weatherImg}
-                                className = "weather-img"
+                                class="w3-container"    
+                                // className = "weather-img"
                                 alt = "Img"
                             />
-                            <p className = "weather-text-bottom">
-                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_min, 10)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
-                                <br></br>
-                                { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_max, 10)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
-                            </p>
-
+                            <footer class="w3-container w3-blue">
+                                <p  /*className = "weather-text-bottom"*/>
+                                    { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_min, 10)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
+                                    <br></br>
+                                    { Number(Math.round((((parseInt(currentDay.weatherEntry.main.temp_max, 10)-273.15)*1)+0)+'e2')+'e-2') + " °C" }
+                                    {   
+                                    this.state[k] === true                
+                                    ? <div> 
+                                        Hello
+                                    </div>
+                                    : <div></div>
+                                }
+                                </p>
+                            </footer>
                         </div>
                     )
                 })}

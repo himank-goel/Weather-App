@@ -161,7 +161,7 @@ class Weather extends Component {
                 <div>{json.city.name}</div>
                 <div>
                 {editedArray.map((currentDay, k) => {
-                    const weatherImg = "http://openweathermap.org/img/w/" + currentDay.weatherEntry.weather[0].icon + ".png";
+                    const weatherImg = "https://openweathermap.org/img/w/" + currentDay.weatherEntry.weather[0].icon + ".png";
                     //console.log(trackImg);
                     return (
                         <div 

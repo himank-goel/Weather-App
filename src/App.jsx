@@ -14,7 +14,7 @@ class App extends Component {
     }
 
     search() {
-        const BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?q=";
+        const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
         var string = this.state.query;
         var replaced = string.split(' ').join('+');
         const FETCH_URL = BASE_URL + replaced + "&mode=json&APPID=6c9cca3b9c5136848c745e322db2fcca"; 
@@ -37,7 +37,7 @@ class App extends Component {
         //console.log("hello");
         var latitude = "lat=" + position.coords.latitude + "&lon=";
         var longitude = position.coords.longitude ;
-        const BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?" + latitude + longitude ;
+        const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?" + latitude + longitude ;
         const FETCH_URL = BASE_URL + "&mode=json&APPID=6c9cca3b9c5136848c745e322db2fcca"; 
         //console.log(FETCH_URL);
         fetch(FETCH_URL, {

@@ -76,7 +76,6 @@ class App extends Component {
                 backgroundColor: '#fff',
                 backgroundImage: 'none',
                 border: '1px solid #ccc',
-                borderRadius: '4px',
                 WebkitBoxShadow: 'inset 0 1px 1px rgba(0,0,0,.075)',
                 boxShadow: 'inset 0 1px 1px rgba(0,0,0,.075)',
                 WebkitTransition: 'border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s',

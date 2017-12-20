@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './app.css';
 import { Form, InputGroup, Glyphicon, Button} from 'react-bootstrap';
-import PlacesAutocomplete from 'react-places-autocomplete'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import Weather from './Weather';
 
 class App extends Component {
@@ -15,23 +15,34 @@ class App extends Component {
         this.showPosition = this.showPosition.bind(this);
     }
 
-    search() {
-        if(this.state.place !== 'Enter Location'){
-            const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
-            var string = this.state.place.split(",")[0];
-            var replaced = string.split(' ').join('+');
-            const FETCH_URL = BASE_URL + replaced + "&mode=json&APPID=6c9cca3b9c5136848c745e322db2fcca"; 
-            fetch(FETCH_URL, {
-                method: 'GET'
-            })   
-            .then(response => response.json())
-            .then(json => {
-                //console.log(json);
-                this.setState({json})
-            });
-        }
-        //console.log(this.state);
+    search(latLang) {
+        // const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
+        // var string = this.state.place.split(",")[0];
+        // var replaced = string.split(' ').join('+');
+        // const FETCH_URL = BASE_URL + replaced + "&mode=json&APPID=6c9cca3b9c5136848c745e322db2fcca"; 
+        // fetch(FETCH_URL, {
+        //     method: 'GET'
+        // })   
+        // .then(response => response.json())
+        // .then(json => {
+        //     //console.log(json);
+        //     this.setState({json})
+        // });
+        var latitude = "lat=" + latLang.lat + "&lon=";
+        var longitude = latLang.lng ;
+        const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?" + latitude + longitude ;
+        const FETCH_URL = BASE_URL + "&mode=json&APPID=6c9cca3b9c5136848c745e322db2fcca"; 
+        //console.log(FETCH_URL);
+        fetch(FETCH_URL, {
+            method: 'GET'
+        })   
+        .then(response => response.json())
+        .then(json => {
+            //console.log(json);
+            this.setState({json})
+        });
     }
+    //console.log(this.state);
 
     searchUsingLocation() {
         navigator.geolocation.getCurrentPosition(this.showPosition);   
@@ -88,8 +99,15 @@ class App extends Component {
         }
 
         const handleEnter = (place) => {
-            console.log("hello");
-            this.search();
+            geocodeByAddress(place)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => 
+                // console.log('Success', latLng),
+                this.search(latLng)
+            )
+            .catch(error => console.error('Error', error))
+            // console.log("hello");
+            // this.search();
         }
           
         return (
@@ -106,7 +124,15 @@ class App extends Component {
                             />
                             <InputGroup.Addon 
                                 className = "Search-Button"
-                                onClick = {() => this.search()}>
+                                onClick = {() => {
+                                    geocodeByAddress(this.state.place)
+                                    .then(results => getLatLng(results[0]))
+                                    .then(latLng => 
+                                        // console.log('Success', latLng),
+                                        this.search(latLng)
+                                    )
+                                    .catch(error => console.error('Error', error))
+                                }}>
                                 <Glyphicon glyph = "search" />
                             </InputGroup.Addon>
                         </InputGroup>
